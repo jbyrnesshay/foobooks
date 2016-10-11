@@ -10,9 +10,33 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+//use \Rych\Random\Random;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/debugbar', function() {
+    $data = Array('foo' => 'bar');
+    Debugbar::info($data);
+    Debugbar::info('Current environment: '.App::environment());
+    Debugbar::error('Error!');
+    Debugbar::warning('Watch out...');
+    Debugbar::addMessage('Another message', 'mylabel');
+
+    return 'Just demoing some of the features of Debugbar';
+});
+
+Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+Route::get('/random', function() {
+
+    $random = new Randomizer();
+    return $random->getRandomString(10);
+});
+
+Route::get('/example', function() {
+    return App::environment();
 });
 
 #test this and then remove

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App;
+
 class BookController extends Controller
 {
     /**
@@ -15,7 +17,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        //return App::environment();
+        return view('book.index');
     }
 
     /**
@@ -25,12 +28,13 @@ class BookController extends Controller
      */
     public function create()
     {
-        $view = '<form method="POST" action="/books/create">';
-        $view .= csrf_field();
-        $view .= '<label>Title: <input type="text" name="title"></label>';
-        $view .= '<input type="submit">';
-        $view .= '</form>';
-        return $view;
+        return view('book.create');
+        //$view = '<form method="POST" action="/books/create">';
+        //$view .= csrf_field();
+        //$view .= '<label>Title: <input type="text" name="title"></label>';
+        //$view .= '<input type="submit">';
+        //$view .= '</form>';
+        //return $view;
     }
 
     /**
@@ -50,12 +54,10 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id='')
+    public function show($id)
     {
-        if ($id == '') {
-            return 'your request did not include a title.';
-        }
-        return 'Results for the book: '.$id;
+
+        return view('book.show')->with('title', $id);
     }
 
     /**
@@ -66,7 +68,7 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('book.edit')->with('title', $id);
     }
 
     /**
