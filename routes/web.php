@@ -24,54 +24,28 @@ Route::post('/books/create', function() {
 
 
 # View all books
-Route::get('/books', function(){
-    return 'here are all the books';
-})->name('books.index');
+Route::get('/books', 'BookController@index')->name('books.index');
 
 # Display form to add a new book
-Route::get('/books/create', function() {
-    $view = '<form method="POST" action="/books/create">';
-    $view .= csrf_field();
-    $view .= '<label>Title: <input type="text" name="title"></label>';
-    $view .= '<input type="submit">';
-    $view .= '</form>';
-    return $view;
-})->name('books.create');
+Route::get('/books/create', 'BookController@create')->name('books.create');
+
 
 # Process form to add a new book
-Route::post('/books', function() {
-
-})->name('books.store');
+Route::post('/books', 'BookController@store')->name('books.store');
 
 #Display an individual book
-Route::get('books/{book}', function($book = '') {
-        if ($book == '') {
-            return 'your request did not include a title.';
-        }
-        return 'Results for the book: '.$book;
-
-})->name('books.show');
+Route::get('/books/{book}', 'BookController@show')->name('books.show');
 
 #Display form to edit an individual book
-Route::get('/books/{book}/edit', function($book){
-
-})->name('books.edit');
-
+Route::get('/books/{book}/edit', 'BookController@edit')->name('books.edit');
 #process form to save edits to an individual book
-Route::put('/books/{book}', function($book){
 
-})->name('books.update');
+Route::put('/books/{book}', 'BookController@update')->name('books.update');
 
 #Delete an individual book
-Route::delete('/books/{book}', function($book) {
+Route::delete('/books/{book}', 'BookController@destroy')->name('books.destroy');
 
-})->name('books.destroy');
+Route::get('/contact', 'PageController@contact')->name('contact');
 
 
-Route::get('/contact', function() {
-    return 'contact me here';
-});
-
-Route::get('/help', function() {
-    return 'get help here';
-});
+Route::get('/help', 'PageController@help')->name('help');
