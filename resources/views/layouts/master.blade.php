@@ -21,7 +21,10 @@
         alt='Foobooks Logo'>
     </header>
     <nav>
-        <a href="/books/create"> create a book </a>
+        <ul>
+        <li><a href="/books"> view all books</a></li>
+        <li><a href="/books/create"> create a book </a></li>
+    </ul>
     </nav>
     <section>
         {{--Main page content will be yielded here--}}

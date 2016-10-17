@@ -8,14 +8,26 @@ a {
     text-decoration: none;
     border: solid 1px black;
     padding: .5em;
-    margin: 1em 1em 1.5em 1em;
+    margin: 1em 1em 2em 1em;
+    background-color: snow;
+    color: blue;
 }
 
 header img {
-    margin-bottom: 1.5em;
+    margin-bottom: 15px;
 }
 
 
 form {
     margin-top: 1.5em;
+}
+
+form input {
+    margin-left: 4em;
+}
+ul {
+list-style-type: none;
+}
+ul li {
+    display: inline
 }

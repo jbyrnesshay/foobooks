@@ -1,5 +1,5 @@
 
-@extends('layouts.master');
+@extends('layouts.master')
 
 @section('title', 'Foobooks')
 
