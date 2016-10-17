@@ -20,14 +20,17 @@
         style='width:300px'
         alt='Foobooks Logo'>
     </header>
-
+    <nav>
+        <a href="/books/create"> create a book </a>
+    </nav>
     <section>
         {{--Main page content will be yielded here--}}
         @yield('content')
+
     </section>
 
     <footer>
-        @copy; {{ date('Y') }}
+        &copy; {{ date('Y') }}
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

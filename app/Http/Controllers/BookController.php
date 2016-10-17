@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Foobooks\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Foobooks\Http\Requests;
 
 use App;
 
@@ -45,7 +45,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ['title'=> 'required|min:3',]);
+
+        $title=$request->input('title');
+
+        #code goes here to add the book to the databse
+
+        return 'process adding new book:  '.title_case($title);
     }
 
     /**

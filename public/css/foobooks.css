@@ -2,3 +2,20 @@ h1{
     background-color: blue;
     color: white;
 }
+
+
+a {
+    text-decoration: none;
+    border: solid 1px black;
+    padding: .5em;
+    margin: 1em 1em 1.5em 1em;
+}
+
+header img {
+    margin-bottom: 1.5em;
+}
+
+
+form {
+    margin-top: 1.5em;
+}
