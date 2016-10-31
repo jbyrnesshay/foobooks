@@ -11,12 +11,18 @@
 @stop
 
 @section('content')
-    <p>this is the foobooks index page</p>
-    <p>fill some content for index page here</p>
+ 
+<?php
+  	//dd($array);
+  	foreach ($array as $book) {
+
+  		echo 'the book '.$book[0]['title'].' was written by '.$book[0]['author'].'<br><br>';
+  	}
+  	?>
 @stop
 
 
 
 @section('body')
     <script src="/js/books/index.js"></script>
-@stop
+ 
