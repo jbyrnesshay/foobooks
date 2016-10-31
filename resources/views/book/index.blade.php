@@ -17,7 +17,7 @@
  
   <?php	foreach ($array as $book) {
 
-  		//echo 'the book '.$book['title'].' was written by '.$book['author'].'<br><br>';
+  	#	echo 'the book '.$book[0]['title'].' was written by '.$book[0]['author'].'<br><br>';
   	echo $book->title.' was written by '.$book->author.'<br><br>';
   	}
   	?>

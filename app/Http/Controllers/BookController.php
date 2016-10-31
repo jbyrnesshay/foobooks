@@ -21,14 +21,14 @@ class BookController extends Controller
         if ($mysqli->connect_errno) {
         echo 'Failed to connect to MySQL: (" . $mysqli->connect_errno . ") ' . $mysqli->connect_error; }
       $array= [];
-        #$books = $mysqli->query("SELECT * FROM books");
+       # $books = $mysqli->query("SELECT * FROM books");
         #$books->data_seek(0);
-        #while($book = $books->fetch_assoc()) {
+        #while($book = $books->fetch_array()) {
            
           
          #       $array [] =  [$book];
       #}
-      $array = \DB::select('select * from books');
+     $array = \DB::select('select * from books');
     
          
            return view('book.index')->with('array', $array);
@@ -69,13 +69,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['title'=> 'required|min:3',]);
+       # $this->validate($request, ['title'=> 'required|min:3',]);
 
-        $title=$request->input('title');
+        #$title=$request->input('title');
+        \DB::insert('insert into books (title, author, published, cover, purchase_link, tags) values (?, ?, ?, ?, ?, ?)', array('the bad guys', 'cool guy', '1970', 'http://www.google.com', 'http://www.google.com', ''));
+
 
         #code goes here to add the book to the databse
 
-        return 'process adding new book:  '.title_case($title);
+        //return 'process adding new book:  '.title_case($title);
     }
 
     /**
