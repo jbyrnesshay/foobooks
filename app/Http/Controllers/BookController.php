@@ -21,14 +21,15 @@ class BookController extends Controller
         if ($mysqli->connect_errno) {
         echo 'Failed to connect to MySQL: (" . $mysqli->connect_errno . ") ' . $mysqli->connect_error; }
       $array= [];
-        $books = $mysqli->query("SELECT * FROM books");
-        $books->data_seek(0);
-        while($book = $books->fetch_assoc()) {
+        #$books = $mysqli->query("SELECT * FROM books");
+        #$books->data_seek(0);
+        #while($book = $books->fetch_assoc()) {
            
           
-                $array [] =  [$book];
-      }
-  
+         #       $array [] =  [$book];
+      #}
+      $array = \DB::select('select * from books');
+    
          
            return view('book.index')->with('array', $array);
         //echo $book['title']." was written by ".$book['author']."<br>";
