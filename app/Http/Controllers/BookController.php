@@ -17,9 +17,26 @@ class BookController extends Controller
      */
     public function index()
     {
-        //return App::environment();
-        return view('book.index');
+        $mysqli = new \mysqli("localhost", "root",NULL, "foobooks");
+        if ($mysqli->connect_errno) {
+        echo 'Failed to connect to MySQL: (" . $mysqli->connect_errno . ") ' . $mysqli->connect_error; }
+      
+        $books = $mysqli->query("SELECT * FROM books");
+        $books->data_seek(0);
+        while($book = $books->fetch_assoc()) {
+
+        echo $book['title']." was written by ".$book['author']."<br>";
+        }
     }
+
+ 
+
+
+# Step 3) Loop through results
+ 
+        //return App::environment();
+#return view('book.index');
+    
 
     /**
      * Show the form for creating a new resource.
