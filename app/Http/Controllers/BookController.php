@@ -15,6 +15,16 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function tester() {
+
+        return view('form');
+    }
+
+
+
+
     public function index()
     {
         $mysqli = new \mysqli("localhost", "root",NULL, "foobooks");
@@ -72,7 +82,7 @@ class BookController extends Controller
        # $this->validate($request, ['title'=> 'required|min:3',]);
 
         #$title=$request->input('title');
-        \DB::insert('insert into books (title, author, published, cover, purchase_link, tags) values (?, ?, ?, ?, ?, ?)', array('the bad guys', 'cool guy', '1970', 'http://www.google.com', 'http://www.google.com', ''));
+        \DB::insert('insert into books (title, author, published, cover, purchase_link, tags) values (?, ?, ?, ?, ?, ?)', array('the bad guys', 'cool guy', '1970', 'http://www.google.com', 'http://www.google.com', 'fiction, western, adventure, happy'));
 
 
         #code goes here to add the book to the databse

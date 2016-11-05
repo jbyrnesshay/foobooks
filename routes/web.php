@@ -18,6 +18,7 @@ Route::get('/books', 'BookController@index')->name('books.index');
 # Display form to add a new book
 Route::get('/books/create', 'BookController@create')->name('books.create');
 
+Route::get('/books/upload', 'BookController@tester')->name('books.upload');
 
 # Process form to add a new book
 Route::post('/books', 'BookController@store')->name('books.store');
