@@ -11,7 +11,7 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('booksmigrationtest')->insert([
+    	DB::table('books')->insert([
         'created_at' => Carbon\Carbon::now()->toDateTimeString(),
         'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
         'title' => 'The Great Gatsby',
@@ -21,7 +21,7 @@ class BooksTableSeeder extends Seeder
         'purchase_link' => 'http://www.barnesandnoble.com/w/the-great-gatsby-francis-scott-fitzgerald/1116668135?ean=9780743273565',
     	]);
 
-    	DB::table('booksmigrationtest')->insert([
+    	DB::table('books')->insert([
         'created_at' => Carbon\Carbon::now()->toDateTimeString(),
         'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
         'title' => 'The Bell Jar',
@@ -31,7 +31,7 @@ class BooksTableSeeder extends Seeder
         'purchase_link' => 'http://www.barnesandnoble.com/w/bell-jar-sylvia-plath/1100550703?ean=9780061148514',
     	]);
 
-    	DB::table('booksmigrationtest')->insert([
+    	DB::table('books')->insert([
         'created_at' => Carbon\Carbon::now()->toDateTimeString(),
         'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
         'title' => 'I Know Why the Caged Bird Sings',

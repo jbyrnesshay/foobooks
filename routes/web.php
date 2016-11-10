@@ -48,6 +48,19 @@ if(App::environment() == 'local') {
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 }
 
+#drop add foobooks database practice route
+if(App::environment('local')) {
+
+    Route::get('/drop', function() {
+
+        DB::statement('DROP database foobooks');
+        DB::statement('CREATE database foobooks');
+
+        return 'Dropped foobooks; created foobooks.';
+    });
+
+};
+
 
 # various practice routes
 Route::get('/debugbar', function() {

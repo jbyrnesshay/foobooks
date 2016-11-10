@@ -13,7 +13,7 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
-       Schema::create('booksmigrationtest', function (Blueprint $table) {
+       Schema::create('books', function (Blueprint $table) {
             #increments method will make a Primary autoincrementing field
             #most tables start this way
             $table->increments('id');
@@ -41,6 +41,6 @@ class CreateBooksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('booksmigrationtest');
+        Schema::drop('books');
     }
 }
