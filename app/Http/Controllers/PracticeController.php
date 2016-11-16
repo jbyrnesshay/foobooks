@@ -9,11 +9,34 @@ use Foobooks\Http\Requests;
 use DB;
 use Carbon;
 use Foobooks\Book;
+#use Foobooks\Author;
 
 
 class PracticeController extends Controller
 {
-    //
+    public function example70() {
+        $book=Book::first();
+        $author= $book->author;
+        echo $book->title.' was written by '.$author->first_name.' '.$author->last_name;
+dump($book->toArray());
+    }
+    public function example60() {
+        $author = new \Foobooks\Author;
+        $author->first_name = 'J.K.';
+        $author->last_name = 'Rowling';
+        $author->bio_url = 'https://en.wikipedia.org/wiki/J._K._Rowling';
+        $author->birth_year = '1965';
+        $author->save();
+        dump($author->toArray());
+        $book = new Book;
+        $book->title = "harry potter and the philospher's stone";
+        $book->published = 1997;
+        $book->cover = 'http://somethinghere.com';
+        $book->purchase_link = 'http://someotherthing.com';
+        $book->author()->associate($author);
+        $book->save();
+        dump($book->toArray());
+            }
     public function example50() {
         $books = Book::all();
         dump($books->toArray());

@@ -127,7 +127,8 @@ class BookController extends Controller
         $book->purchase_link = $request->purchase_link;
         $book->save();
         Session::flash('flash_message', 'your changes were saved');
-        return redirect('/books/'.$request->id.'/edit');
+        #return redirect('/books/'.$request->id.'/edit');
+        return redirect('/books');
         }
 
     /**

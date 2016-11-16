@@ -49,15 +49,8 @@
     	<form method='POST' action='/books/{{$book->id}}'>
     {{ method_field('DELETE') }}
     {{ csrf_field() }}
-   
-
-     
-	 
-		<label>DELETE?</label>
-		
-		 
-		 
-		<input type='submit' name = "delete" value='Submit'>
+   <label>DELETE?</label>
+	<input type='submit' name = "delete" value='Submit'>
  </div>
 	</form>
     
