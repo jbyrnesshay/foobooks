@@ -7,20 +7,28 @@
 
 
 @section('head')
-    <link href="/css/books/index.css" type="text/css" rel='stylesheet'>
+    <link href="/css/foobooks.css" type="text/css" rel='stylesheet'>
 @stop
 
 @section('content')
  
 
- 
- 
-  <?php	foreach ($array as $book) {
+  <div class = "book">
+    @foreach ($books as $book)
 
-  	#	echo 'the book '.$book[0]['title'].' was written by '.$book[0]['author'].'<br><br>';
-  	echo $book->title.' was written by '.$book->author.'<br><br>';
-  	}
-  	?>
+    	<div class="show">
+    		<a href="/books/{{$book->id}}">show</a>
+    	</div>
+    	<div class="edit">
+    		<a href="/books/{{$book->id}}/edit">edit</a>
+    	</div>
+
+    	
+        <h2>{{$book->title}}</h2>
+        <br>
+    @endforeach
+  </div>
+   
 @stop
 
 

@@ -4,7 +4,7 @@ h1{
 }
 
 
-a {
+nav a {
     text-decoration: none;
     border: solid 1px black;
     padding: .5em;
@@ -21,13 +21,39 @@ header img {
 form {
     margin-top: 1.5em;
 }
-
+form.delete {
+    margin: 0;
+    display: inline;
+}
 form input {
     margin-left: 4em;
 }
 ul {
-list-style-type: none;
+    list-style-type: none;
 }
+
 ul li {
-    display: inline
+    display: inline;
+
+}
+#flash_message {
+    position: absolute;
+    top:0;
+    left:0;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    color: red;
+    font-style: bolder;
+    padding: .2em;
+    border: 3px solid black;
+    background: yellow;
+    text-align: center;
+
+}
+.edit, .show {
+    display: inline;
+    border: 1px solid black;
+}
+h2 {
+    display: inline-block;
 }

@@ -7,7 +7,10 @@
     </title>
 
     <meta charset='utf-8'>
-    <link href="/css/foobooks.css" type='text/css' rel='stylesheet'>
+    
+    <!-- Latest compiled and minified CSS -->
+
+<link href="/css/foobooks.css" type='text/css' rel='stylesheet'>
 
     {{-- Yield any page specific CSS files or anything else you might want in the head --}}
     @yield('head')
@@ -19,6 +22,8 @@
         src='http://making-the-internet.s3.amazonaws.com/laravel-foobooks-logo@2x.png'
         style='width:300px'
         alt='Foobooks Logo'>
+
+       
     </header>
     <nav>
         <ul>
@@ -27,6 +32,15 @@
     </ul>
     </nav>
     <section>
+   
+        @if(Session::get('flash_message') != null)
+                 <div id="flash_message">
+             
+                {{Session::get('flash_message')}}
+             </div>
+        @endif
+   
+     
         {{--Main page content will be yielded here--}}
         @yield('content')
 

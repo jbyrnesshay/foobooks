@@ -11,9 +11,14 @@ class AddPageCountToBooksTable extends Migration
      *
      * @return void
      */
-  public function up()
-    {
-       Schema::create('booksmigrationtest', function (Blueprint $table) {
+  
+        public function up()
+{
+        Schema::table('books', function (Blueprint $table) {
+            $table->integer('page_count')->nullable();
+        });
+    }
+       /*Schema::create('booksmigrationtest', function (Blueprint $table) {
             #increments method will make a Primary autoincrementing field
             #most tables start this way
             $table->increments('id');
@@ -31,16 +36,21 @@ class AddPageCountToBooksTable extends Migration
 
             #fyi we are skipping the tags field for now, more on that later
 
-       });
-    }
-
+       });*/
+   public function down()
+{
+    Schema::table('books', function (Blueprint $table) {
+        $table->dropColumn('page_count');
+    });
+}
+}
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
+   /*public function down()
     {
         Schema::drop('booksmigrationtest');
     }
-}
+*/

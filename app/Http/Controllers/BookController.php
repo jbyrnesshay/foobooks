@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use Foobooks\Http\Requests;
 
-use App;
+use Foobooks\Book;
+use Session;
 
 class BookController extends Controller
 {
@@ -27,24 +28,8 @@ class BookController extends Controller
 
     public function index()
     {
-        $mysqli = new \mysqli("localhost", "root",NULL, "foobooks");
-        if ($mysqli->connect_errno) {
-        echo 'Failed to connect to MySQL: (" . $mysqli->connect_errno . ") ' . $mysqli->connect_error; }
-      $array= [];
-       # $books = $mysqli->query("SELECT * FROM books");
-        #$books->data_seek(0);
-        #while($book = $books->fetch_array()) {
-           
-          
-         #       $array [] =  [$book];
-      #}
-     $array = \DB::select('select * from books');
-    
-         
-           return view('book.index')->with('array', $array);
-        //echo $book['title']." was written by ".$book['author']."<br>";
-        #}
-    
+        $books = Book::all();
+        return view('book.index')->with('books', $books);
 }
  
 
@@ -79,11 +64,19 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-       # $this->validate($request, ['title'=> 'required|min:3',]);
+       $this->validate($request, ['title'=> 'required|min:3', 'published' => 'required|min:4|numeric', 'cover' => 'required|url', 'purchase_link' => 'required|url']);
 
         #$title=$request->input('title');
-        \DB::insert('insert into books (title, author, published, cover, purchase_link, tags) values (?, ?, ?, ?, ?, ?)', array('the bad guys', 'cool guy', '1970', 'http://www.google.com', 'http://www.google.com', 'fiction, western, adventure, happy'));
-
+       
+          $book = new Book();
+          $book ->title = $request->title;
+          $book->published = $request->published;
+          $book->cover = $request->cover;
+          $book->author = "dave fraud";
+          $book->purchase_link = $request->purchase_link;
+          $book->save();
+          Session::flash('flash_message', 'your book was added');
+          return redirect('/books');
 
         #code goes here to add the book to the databse
 
@@ -110,7 +103,12 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        return view('book.edit')->with('title', $id);
+        $book=Book::find($id);
+        if(is_null($book)) {
+    Session::flash('flash_message', 'Book not found');
+    return redirect('/books');
+}
+        return view('book.edit')->with('book', $book);
     }
 
     /**
@@ -122,17 +120,33 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $book=Book::find($request->id);
+        $book->title = $request->title;
+        $book->cover = $request->cover;
+        $book->published = $request->published;
+        $book->purchase_link = $request->purchase_link;
+        $book->save();
+        Session::flash('flash_message', 'your changes were saved');
+        return redirect('/books/'.$request->id.'/edit');
+        }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage.''
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {  
+        $book=Book::find($id);
+
+        
+        $book->delete();
+        #DB::table('users')->delete();
+
+        #DB::table('users')->where('votes', '>', 100)->delete();
+        Session::flash('flash_message', 'your book was deleted');
+        return redirect('/books');
+
     }
 }
