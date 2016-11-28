@@ -91,8 +91,12 @@ class BookController extends Controller
      */
     public function show($id)
     {
-
-        return view('book.show')->with('title', $id);
+        $book = Book::find($id);
+        if(is_null($book)) {
+    Session::flash('flash_message', 'Book not found');
+    return redirect('/books');
+}
+        return view('book.show')->with('book', $book);
     }
 
     /**

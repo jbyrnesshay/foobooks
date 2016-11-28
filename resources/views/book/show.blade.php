@@ -14,25 +14,17 @@ such as a page specific stylesheets.
 @stop
 
 @section('content')
-    @include('view.edit')
-    @if($title)
-        <h1>Show book: {{ $title }}</h1>
-    @else
-        <h1>No book chosen</h1>
-    @endif
+    {{--@include('view.edit')--}}
 
-    @if($title == 'sogood')
-        <p>your title is very good!</p>
-    @else
-        <p>aww, your title is not so good!</p>
-    @endif
+ 
+     {{ $book->title}}<br>
+     {{ $book->author->first_name." ".$book->author->last_name}}<br>
+     {{ $book->published}}<br>
+     {{ $book->cover}}<br>
+     {{ $book->purchase_link}}<br>
+     
 
-    @for($i=0; $i<10; $i++)
-        {{$i}} &nbsp;
-         cats
-        <br>
-
-    @endfor
+  
 
 @stop
 
