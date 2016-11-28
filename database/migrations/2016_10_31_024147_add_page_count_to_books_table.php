@@ -44,6 +44,7 @@ class AddPageCountToBooksTable extends Migration
     });
     }*/
     }
+}
     /**
      * Reverse the migrations.
      *
