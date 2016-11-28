@@ -13,8 +13,8 @@ class AddPageCountToBooksTable extends Migration
      */
   
         public function up()
-{
-        Schema::table('books', function (Blueprint $table) {
+    {
+        Schema::table('books', function (Blueprint $table){
             $table->integer('page_count')->nullable();
         });
     }
@@ -38,12 +38,12 @@ class AddPageCountToBooksTable extends Migration
 
        });*/
    public function down()
-{
-    Schema::table('books', function (Blueprint $table) {
+    {
+    /*Schema::table('books', function (Blueprint $table) {
         $table->dropColumn('page_count');
     });
-}
-}
+    }*/
+    }
     /**
      * Reverse the migrations.
      *
