@@ -14,6 +14,28 @@ use Foobooks\Book;
 
 class PracticeController extends Controller
 {
+    
+    public function example79() {
+        $books = Book::with('tags')->get();
+
+        foreach($books as $book) {
+            dump($book->title.' is tagged with: ');
+            foreach($book->tags as $tag) {
+                dump($tag->name);
+            }
+        }
+    }
+    
+
+    public function example75() {
+        $book = Book::where('title', '=', 'The Bell Jar')->first();
+        dump($book->title);
+
+        foreach($book->tags as $tag) {
+            dump($tag->name);
+        }
+    }
+
     public function example70() {
         $book=Book::first();
         $author= $book->author;

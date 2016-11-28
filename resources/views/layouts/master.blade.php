@@ -9,7 +9,7 @@
     <meta charset='utf-8'>
     
     <!-- Latest compiled and minified CSS -->
-
+<script src="https://use.fontawesome.com/ea0bd51253.js"></script>
 <link href="/css/foobooks.css" type='text/css' rel='stylesheet'>
 
     {{-- Yield any page specific CSS files or anything else you might want in the head --}}

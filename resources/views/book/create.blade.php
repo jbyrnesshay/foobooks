@@ -17,6 +17,16 @@
           <label>Title:</label>
          <input type='text' id = 'title' name='title' value = "{{ old ('title', 'green eggs and ham') }}">
          </div>
+
+           <div class ='form-group'>
+            <label for = 'author_id'>* Author:</label>
+            <select id='author_id' name='author_id'>
+              @foreach($authors_for_dropdown as $author_id => $author_name)
+                  <option value='{{ $author_id}}' {{($author_id) ? 'SELECTED' : ''}}>
+                      {{$author_name}}
+                  </option>
+              @endforeach
+          </select>
          
          <div class = "form-group">
             <label>Published:</label>

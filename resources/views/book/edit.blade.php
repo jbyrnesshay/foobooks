@@ -19,7 +19,17 @@
           <label>Title:</label>
          <input type='text' id = 'title' name='title' value = "{{$book->title, old ('title')}}">
          </div>
-         
+
+         <div class ='form-group'>
+            <label for = 'author_id'>* Author:</label>
+            <select id='author_id' name='author_id'>
+              @foreach($authors_for_dropdown as $author_id => $author_name)
+                  <option value='{{ $author_id}}' {{($book->author_id == $author_id) ? 'SELECTED' : ''}}>
+                      {{$author_name}}
+                  </option>
+              @endforeach
+          </select>
+        </div>
          <div class = "form-group">
             <label>Published:</label>
             <input type='text' id='published' name='published' value="{{$book->published, old ('published')}}">
@@ -39,6 +49,15 @@
                value="{{$book->purchase_link ,old('purchase_link' )}}"
            >
          </div>
+
+         <div class="form-group">
+            @foreach($tags_for_checkbox as $tag_id => $tag_name)
+              <input type = 'checkbox' value='{{ $tag_id}}' name='tags[]' {{(in_array($tag_name, $tags_for_this_book)) ? 'CHECKED': '' }}
+              >
+              
+              {{$tag_name}}<br>
+            @endforeach
+          </div>
          
          <div class = "form-instructions">
              All fields are required

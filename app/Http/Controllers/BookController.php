@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Foobooks\Http\Requests;
 
 use Foobooks\Book;
+use Foobooks\Author;
+use Foobooks\Tag;
 use Session;
 
 class BookController extends Controller
@@ -47,7 +49,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+
+        $authors_for_dropdown = Author::authorsForDropdown();
+        return view('book.create')->with("authors_for_dropdown", $authors_for_dropdown);
         //$view = '<form method="POST" action="/books/create">';
         //$view .= csrf_field();
         //$view .= '<label>Title: <input type="text" name="title"></label>';
@@ -64,6 +68,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+
        $this->validate($request, ['title'=> 'required|min:3', 'published' => 'required|min:4|numeric', 'cover' => 'required|url', 'purchase_link' => 'required|url']);
 
         #$title=$request->input('title');
@@ -72,8 +77,9 @@ class BookController extends Controller
           $book ->title = $request->title;
           $book->published = $request->published;
           $book->cover = $request->cover;
-          $book->author = "dave fraud";
+         
           $book->purchase_link = $request->purchase_link;
+          $book->author_id = $request->author_id;
           $book->save();
           Session::flash('flash_message', 'your book was added');
           return redirect('/books');
@@ -105,14 +111,32 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id = null)
     {
-        $book=Book::find($id);
+        $book=Book::with('tags')->find($id);
         if(is_null($book)) {
     Session::flash('flash_message', 'Book not found');
     return redirect('/books');
-}
-        return view('book.edit')->with('book', $book);
+}       
+   
+    # Organize the authors into an array where the key = author id and value = author name
+    $authors_for_dropdown = Author::authorsForDropdown();
+    $tags_for_checkbox = Tag::getTagsForCheckboxes();
+
+    #create a simple a rray of just the tag names for tags associaated with this book
+    $tags_for_this_book = [];
+    foreach($book->tags as $tag){
+        $tags_for_this_book[] = $tag->name;
+    }
+
+    #results in array like this $tags_for_this_book['novel',  'fiction','classic'];
+
+        return view('book.edit')->with([
+            'book'=>$book,
+            'authors_for_dropdown'=>$authors_for_dropdown,
+            'tags_for_checkbox'=>$tags_for_checkbox,
+            'tags_for_this_book' =>$tags_for_this_book,]
+    );
     }
 
     /**
@@ -129,7 +153,18 @@ class BookController extends Controller
         $book->cover = $request->cover;
         $book->published = $request->published;
         $book->purchase_link = $request->purchase_link;
+        $book->author_id = $request->author_id;
+         
+        if($request->tags) {
+            $tags = $request->tags;
+        }
+        else {
+            $tags = [];
+        }
+        $book->tags()->sync($tags);
         $book->save();
+        //this could be $tags = ($request->tags) ?: [];
+
         Session::flash('flash_message', 'your changes were saved');
         #return redirect('/books/'.$request->id.'/edit');
         return redirect('/books');

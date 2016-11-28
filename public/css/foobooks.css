@@ -50,13 +50,12 @@ ul li {
     text-align: center;
 
 }
-.edit, .show {
+/*.edit, .show {
     display: inline;
     border: 1px solid black;
-}
-h2 {
-    display: inline-block;
-}
+}*/
+ 
+ 
 .delete {
     border: 1px solid black;
     background: red;
