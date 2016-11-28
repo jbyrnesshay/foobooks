@@ -176,10 +176,23 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function delete($id) {
+
+        $book = Book::find($id);
+        return view('book.delete')->with('book', $book);
+    }
     public function destroy($id)
     {  
         $book=Book::find($id);
+        if(is_null($book)) {
+            Session:flash('message', 'Book not found');
+            return redirect('/books');
+        }
 
+        if($book->tags()){
+            $book->tags()->detach();
+        }
         
         $book->delete();
         #DB::table('users')->delete();

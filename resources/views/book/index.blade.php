@@ -28,8 +28,10 @@
             	 
             		<a href="/books/{{$book->id}}/edit">
                     <i class ='fa fa-pencil'></i>edit</a>
-            	   <br>
-                   <a href='/books/{{$book->id}}'><i class='fa fa-eye'></i> View</a><br>
+            	   
+                   <a href='/books/{{$book->id}}'><i class='fa fa-eye'></i> View</a>
+
+                   <a href='/books/{{$book->id}}/delete'><i class = 'fa fa-trash'></i>Delete</a>
                    </section>
 
             	

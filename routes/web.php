@@ -36,6 +36,8 @@ Route::get('/books/{id}/edit', 'BookController@edit')->name('books.edit');
 
 Route::put('/books/{id}', 'BookController@update')->name('books.update');
 
+Route::get('/books/{id}/delete', 'BookController@delete')->name('books.destroy');
+ 
 #Delete an individual book
 Route::delete('/books/{id}', 'BookController@destroy')->name('books.destroy');
 
