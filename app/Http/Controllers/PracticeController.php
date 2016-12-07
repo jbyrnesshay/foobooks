@@ -14,6 +14,12 @@ use Foobooks\Book;
 
 class PracticeController extends Controller
 {
+    public function makepractice() {
+    for ($i=0; $i<100; $i++) {
+    Route::get('/practice/'.$i, 'PracticeController@example'.$i)->name('practice.example'.$i);
+}
+}
+        
     
     public function example79() {
         $books = Book::with('tags')->get();
@@ -257,4 +263,7 @@ dump($book->toArray());
             echo $book->title;
         }
     }
-}
+    
+
+    }
+

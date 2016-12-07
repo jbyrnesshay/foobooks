@@ -11,6 +11,18 @@
 |
 */
 
+Route::get('/show-login-status', function() {
+
+    # You may access the authenticated user via the Auth facade
+    $user = Auth::user();
+
+    if($user)
+        dump($user->toArray());
+    else
+        dump('You are not logged in.');
+
+    return;
+});
 
 # View all books
 Route::get('/books', 'BookController@index')->name('books.index');
@@ -20,7 +32,7 @@ Route::get('/', function () {
 Route::get('/', 'BookController@index')->name('books.index');
 
 # Display form to add a new book
-Route::get('/books/create', 'BookController@create')->name('books.create');
+Route::get('/books/create', 'BookController@create')->name('books.create')->middleware('auth');
 
 Route::get('/books/upload', 'BookController@tester')->name('books.upload');
 
@@ -87,10 +99,9 @@ Route::get('/test', function() {
         //echo e($teststring);
 });
 
+
 Route::get('/practice', 'PracticeController@index')->name('practice.index');
-for ($i=0; $i<100; $i++) {
-    Route::get('/practice/'.$i, 'PracticeController@example'.$i)->name('practice.example'.$i);
-}
+
 
 //Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
@@ -144,3 +155,7 @@ Route::get('/debug', function() {
     echo '</pre>';
 
 });
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/home', 'HomeController@index');

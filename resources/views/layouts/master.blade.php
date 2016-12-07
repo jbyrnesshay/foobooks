@@ -5,13 +5,13 @@
         {{-- Yield the title if it exist, otherwise default to 'Foobooks'--}}
         @yield('title', 'Foobooks')
     </title>
-
+    
     <meta charset='utf-8'>
     
     <!-- Latest compiled and minified CSS -->
 <script src="https://use.fontawesome.com/ea0bd51253.js"></script>
 <link href="/css/foobooks.css" type='text/css' rel='stylesheet'>
-
+<link href="/css/app.css" rel="stylesheet">
     {{-- Yield any page specific CSS files or anything else you might want in the head --}}
     @yield('head')
 
@@ -27,8 +27,16 @@
     </header>
     <nav>
         <ul>
-        <li><a href="/books"> view all books</a></li>
-        <li><a href="/books/create"> create a book </a></li>
+            @if(Auth::check())
+                <li><a href="/"> Home </a></li>
+                <li><a href="/books/create"> add a book </a></li>
+                <li><a href='/logout'>log out</a></li>
+            @else
+                <li><a href ="/"> Home</a></li>
+                <li><a href="/login">Log in</a></li>
+                <li><a href='/register'>Register</a></li>
+            @endif
+
     </ul>
     </nav>
     <section>

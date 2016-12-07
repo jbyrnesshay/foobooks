@@ -22,6 +22,7 @@ class ConnectAuthorsAndBooks extends Migration
 
             #author_id is foreign key that connects to id field in authors table
             $table->foreign('author_id')->references('id')->on('authors');
+
             
         });
     }
@@ -39,5 +40,6 @@ class ConnectAuthorsAndBooks extends Migration
                 $table->dropColumn('author_id');
         });
         //
+    
     }
 }

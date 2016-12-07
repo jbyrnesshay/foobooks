@@ -9,6 +9,7 @@ use Foobooks\Http\Requests;
 use Foobooks\Book;
 use Foobooks\Author;
 use Foobooks\Tag;
+
 use Session;
 
 class BookController extends Controller
@@ -28,9 +29,19 @@ class BookController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
+
+        $user = $request->user();
+        // or $user = Auth::user();
+
+        if($user) {
+            $books = $user->books()->get();
+        }
+        else {
+            $books = [];
+        }
+        //$books = Book::all();
         return view('book.index')->with('books', $books);
 }
  
@@ -50,6 +61,11 @@ class BookController extends Controller
     public function create()
     {
 
+       /* if(!(\Auth::check())) {
+            Session::flash('flash_message', 'You have to be logged in to add a book');
+                return redirect('/');
+
+        }*/
         $authors_for_dropdown = Author::authorsForDropdown();
         return view('book.create')->with("authors_for_dropdown", $authors_for_dropdown);
         //$view = '<form method="POST" action="/books/create">';
@@ -80,6 +96,7 @@ class BookController extends Controller
          
           $book->purchase_link = $request->purchase_link;
           $book->author_id = $request->author_id;
+          $book->user_id = $request->user()->id;
           $book->save();
           Session::flash('flash_message', 'your book was added');
           return redirect('/books');

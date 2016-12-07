@@ -13,15 +13,17 @@ class BooksTableSeeder extends Seeder
     public function run()
     {
         $author_id=Author::where('last_name','=','Fitzgerald')->pluck('id')->first();
+
     	DB::table('books')->insert([
         'created_at' => Carbon\Carbon::now()->toDateTimeString(),
         'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
         'title' => 'The Great Gatsby',
-        'author_id' => $author_id,
-        
+       
+         'author_id' => $author_id,
         'published' => 1925,
         'cover' => 'http://img2.imagesbn.com/p/9780743273565_p0_v4_s114x166.JPG',
         'purchase_link' => 'http://www.barnesandnoble.com/w/the-great-gatsby-francis-scott-fitzgerald/1116668135?ean=9780743273565',
+        'user_id' => 1,
         
     	]);
         $author_id=Author::where('last_name','=','Plath')->pluck('id')->first();
@@ -34,7 +36,7 @@ class BooksTableSeeder extends Seeder
         'published' => 1963,
         'cover' => 'http://img1.imagesbn.com/p/9780061148514_p0_v2_s114x166.JPG',
         'purchase_link' => 'http://www.barnesandnoble.com/w/bell-jar-sylvia-plath/1100550703?ean=9780061148514',
-        
+        'user_id'=> 1,
     	]);
 
         $author_id=Author::where('last_name','=','Angelou')->pluck('id')->first();
@@ -47,6 +49,7 @@ class BooksTableSeeder extends Seeder
         'published' => 1969,
         'cover' => 'http://img1.imagesbn.com/p/9780345514400_p0_v1_s114x166.JPG',
         'purchase_link' => 'http://www.barnesandnoble.com/w/i-know-why-the-caged-bird-sings-maya-angelou/1100392955?ean=9780345514400',
+        'user_id'=>1,
          
     	]);
 	}

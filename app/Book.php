@@ -20,4 +20,9 @@ class Book extends Model
     public static function getAllBooksWithAuthors() {
     	return Book::with('author')->orderBy('id', 'desc')->get();
     }
+    
+    public function user() {
+            return $this->belongsTo('Foobooks\User');
+    }
+    
 }
