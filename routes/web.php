@@ -25,11 +25,9 @@ Route::get('/show-login-status', function() {
 });
 
 # View all books
-Route::get('/books', 'BookController@index')->name('books.index');
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/', 'BookController@index')->name('books.index');
+Route::get('/books', 'BookController@index')->name('books.index')->middleware('auth');
+Route::get('/', 'PageController@welcome');  
+//Route::get('/', 'BookController@index')->name('books.index');
 
 # Display form to add a new book
 Route::get('/books/create', 'BookController@create')->name('books.create')->middleware('auth');
